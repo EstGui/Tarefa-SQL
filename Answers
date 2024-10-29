@@ -1,0 +1,66 @@
+-- 1. Listar alunos ordenados por nome e data de nascimento
+SELECT * FROM alunos
+ORDER BY nome, data_nascimento DESC;
+
+-- 2. Listar professores e suas especialidades em ordem decrescente
+SELECT nome, especialidade
+FROM professores
+ORDER BY nome DESC;
+
+-- 3. Listar disciplinas ordenadas por carga horária
+SELECT disciplina, carga_horaria
+FROM matriz_curricular
+ORDER BY carga_horaria DESC;
+
+-- 4. Contar o número de alunos em cada status de matrícula
+SELECT status, COUNT(*) AS total_alunos
+FROM matriculas
+GROUP BY status;
+
+-- 5. Listar cursos com a soma total da carga horária de suas disciplinas
+
+
+-- 6. Contar quantos professores estão lecionando mais de 3 turmas
+
+
+-- 7. Listar os alunos matriculados em mais de uma disciplina
+
+
+-- 8. Listar cursos com mais de 2000 horas de carga horária
+ 
+
+-- 9. Contar o número total de turmas e listar por professor
+
+
+-- 10. Listar disciplinas e a média da carga horária por curso
+
+
+-- 11. Exibir os alunos e seus respectivos status de matrícula, ordenados pelo status e pela data de matrícula
+
+
+-- 12. Exibir a idade dos alunos ordenados da maior para a menor idade
+
+
+-- 13. Exibir as disciplinas e o número de alunos matriculados em cada uma
+
+
+-- 14. Listar as turmas com o nome dos professores e disciplinas, ordenadas por horário
+
+
+-- 15. Contar quantas disciplinas têm carga horária superior a 80 horas
+
+
+-- 16. Listar os cursos e a quantidade de disciplinas que cada curso possui
+
+
+-- 17. Exibir os professores que têm mais de 2 disciplinas com carga horária superior a 100 horas
+
+
+-- 18. Listar disciplinas que tenham pelo menos 5 alunos matriculados
+
+
+-- 19. Exibir o número de alunos por status, ordenando pelos status com mais alunos
+
+
+-- 20. Listar professores e a soma da carga horária das disciplinas que lecionam
+
