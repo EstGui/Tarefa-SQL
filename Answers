@@ -18,49 +18,92 @@ FROM matriculas
 GROUP BY status;
 
 -- 5. Listar cursos com a soma total da carga horária de suas disciplinas
-
+SELECT curso, SUM(carga_horaria) AS total_carga_horaria
+FROM matriz_curricular
+GROUP BY curso;
 
 -- 6. Contar quantos professores estão lecionando mais de 3 turmas
-
+SELECT COUNT(*) AS total_professores
+FROM (SELECT professor_id, COUNT(*) AS total_turmas
+      FROM turmas
+      GROUP BY professor_id
+      HAVING total_turmas > 3) AS professores_turmas;
 
 -- 7. Listar os alunos matriculados em mais de uma disciplina
-
+SELECT aluno_id, COUNT(*) AS total_disciplinas
+FROM matriculas
+GROUP BY aluno_id
+HAVING total_disciplinas > 1;
 
 -- 8. Listar cursos com mais de 2000 horas de carga horária
- 
+SELECT curso
+FROM (SELECT curso, SUM(carga_horaria) AS total_carga_horaria
+      FROM matriz_curricular
+      GROUP BY curso) AS cursos_carga
+WHERE total_carga_horaria > 2000;
 
 -- 9. Contar o número total de turmas e listar por professor
-
+SELECT professor_id, COUNT(*) AS total_turmas
+FROM turmas
+GROUP BY professor_id;
 
 -- 10. Listar disciplinas e a média da carga horária por curso
-
+SELECT curso, AVG(carga_horaria) AS media_carga_horaria
+FROM matriz_curricular
+GROUP BY curso;
 
 -- 11. Exibir os alunos e seus respectivos status de matrícula, ordenados pelo status e pela data de matrícula
-
+SELECT aluno_id, status, data_matricula
+FROM matriculas
+ORDER BY status, data_matricula;
 
 -- 12. Exibir a idade dos alunos ordenados da maior para a menor idade
-
+SELECT Nome, FLOOR((SYSDATE - Data_de_Nascimento) / 365) AS Idade
+FROM Alunos
+ORDER BY Idade DESC;
 
 -- 13. Exibir as disciplinas e o número de alunos matriculados em cada uma
-
+SELECT disciplina_id, COUNT(*) AS total_alunos
+FROM matriculas
+GROUP BY disciplina_id;
 
 -- 14. Listar as turmas com o nome dos professores e disciplinas, ordenadas por horário
-
+SELECT t.turma_id, p.nome AS professor, d.nome AS disciplina, t.horario
+FROM turmas t
+JOIN professores p ON t.professor_id = p.professor_id
+JOIN disciplinas d ON t.disciplina_id = d.disciplina_id
+ORDER BY t.horario;
 
 -- 15. Contar quantas disciplinas têm carga horária superior a 80 horas
-
+SELECT COUNT(*) AS total_disciplinas
+FROM disciplinas
+WHERE carga_horaria > 80;
 
 -- 16. Listar os cursos e a quantidade de disciplinas que cada curso possui
-
+SELECT curso, COUNT(*) AS total_disciplinas
+FROM matriz_curricular
+GROUP BY curso;
 
 -- 17. Exibir os professores que têm mais de 2 disciplinas com carga horária superior a 100 horas
-
+SELECT professor_id, COUNT(*) AS disciplinas_com_mais_100_horas
+FROM disciplinas
+WHERE carga_horaria > 100
+GROUP BY professor_id
+HAVING disciplinas_com_mais_100_horas > 2;
 
 -- 18. Listar disciplinas que tenham pelo menos 5 alunos matriculados
-
+SELECT disciplina_id, COUNT(*) AS total_alunos
+FROM matriculas
+GROUP BY disciplina_id
+HAVING total_alunos >= 5;
 
 -- 19. Exibir o número de alunos por status, ordenando pelos status com mais alunos
-
+SELECT status, COUNT(*) AS total_alunos
+FROM matriculas
+GROUP BY status
+ORDER BY total_alunos DESC;
 
 -- 20. Listar professores e a soma da carga horária das disciplinas que lecionam
-
+SELECT Nome_Professor, SUM(Carga_Horaria) AS total_carga_horaria
+FROM Materias
+GROUP BY Nome_Professor;
